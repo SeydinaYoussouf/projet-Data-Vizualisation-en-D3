@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+</head>
+
+<body>
+    <!-- <div class="d3_example">
+            <cite class="d3_example-text">Example Output </cite>
+            <p id="d3_p-all">hello World 1</p>
+            <p id="d3_p-all">hello World 2</p>
+            <p id="d3_p-all">hello World 3</p>
+            <p id="d3_p-all">hello World 4</p>
+        </div> -->
+
+    <div class="d3_example">
+        <cite class="d3_example-text">Example Output</cite>
+        <p id="d3_p">hello world 1</p>
+
+        <h1>Youssoupha h1_0</h1>
+        <h1>Ndiaye H1_1</h1>
+        <h1>Data Science h1_2</h1>
+    </div>
+
+    <script>
+        d3.selectAll("#d3_p")
+            .style("color", "blue")
+
+        // Ca marhce lineairement comme avec une p'tite indentation :
+        d3.select("h1") //bcp plus conseille car bcp plus lisible
+            .style("font-size", "20px")
+            .style("font-family", "algerian")
+            .style("background", "blue")
+            .style("width", "20%")
+            .style("border-radius", "20px")
+
+        d3.select("body")
+            .append("p")
+            .text("Bonjour je suis le texte Ajoute")
+            .style("color", "purple")
+
+        /*Moin conseille*/ d3.select("body").append("p").text("Bonjour je suis le 2nd texte Ajoute").style("color", "purple")
+
+        // j'ai cree ma variable svg pour ensuite y creer un circle pour pouvoir le modifier ...
+        const svg = d3.select("body") //identique au DOM a : const svg = document.querySelector("body")
+            .append("svg") // ajoute un svg dans le body
+            .attr("width", 500) // l' attribue un width de 500px
+            .attr("height", 200) // l'attribue une height de 200px
+            .style("border", "1px solid black"); // style = 1px_De_epaisseur, style (solid = plein), couleur noir
+
+        const data = [10, 20, 30, 40, 50]; // je cree mon tableau de donnees pour l'associer a des circle
+
+        // je selectionne le svg dont j ai cree pour associer le cercle a chq data
+        svg.selectAll("circle") //je selectionne tt les circles dans mon <svg><...
+            .data(data) //je le lie a mon tableau de donnee data
+            .enter() //pour chaq donnee cree un circle
+            .append("circle") //j'ajoute un circle pour chaque data dans mon svg
+            .attr("cx", (d, i) => i * 100 + 40) //reglage suivant Ox chaque donnee aligne de 0 a i*100 + 40 de gch a drte
+            .attr("cy", 100) // de haut en bas, les circles seront a 100px de Oy
+            .attr("r", d => d) // chaque rayon auront comme valeur chaq data du tab data
+            .attr("fill", "steelblue") // le bckground de chaque circle ont un fond steelblue
+
+        svg.selectAll("text") //je cree une autre type de svg text
+            .data(data) // je l'associe a mes donnees data
+            .enter() // je lie chq donnee a mon text
+            .append("text") // j'aoute chq text pour mes donnes
+            .attr("x", (d, i) => i * 100 + 30) // je modifie leur positio svnt Ox
+            .attr("y", 170) //je modifie leur position svnt Oy
+            .attr("text-anchor","middle") // je le place au milieu
+            .text(d=>d) //ce que j'affiche chq donnee sera affiche en bas de son cercle
+            .style("font-size","20px") // la f_siwe de chq text
+            .style("fill","purple") //la couleur du texte
+            .style("font-family","algerian") //le type du texte
+
+        d3.selectAll("circle") //je selectionne tt les circle pour create une p'tite transition de la couleur initial au orange en 1000ms et avec rayon de cercle * 1.3
+            .transition()
+            .duration(1000)
+            .attr("r",d => d * 1.3)
+            .attr("fill","orange")
+
+
+
+
+
+    </script>
+</body>
+
+</html>
